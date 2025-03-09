@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulsante Magico</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #121212;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .circle-button {
+            width: 150px;
+            height: 150px;
+            background-color: #000;
+            border-radius: 50%;
+            border: 5px solid #800080;
+            color: transparent;
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .circle-button:hover {
+            border-color: #4b0082;
+            transform: scale(1.1);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Form con il pulsante -->
+    <form id="notifyForm" action="https://formspree.io/f/mjkybnbb" method="POST">
+        <input type="hidden" name="message" value="Il pulsante nero è stato premuto!">
+        <button type="submit" class="circle-button"></button>
+    </form>
+
+    <script>
+        document.getElementById('notifyForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            
+            fetch(this.action, {
+                method: this.method,
+                body: new FormData(this),
+                headers: { 'Accept': 'application/json' }
+            });
+        });
+    </script>
+
+</body>
+</html>
